@@ -12,10 +12,63 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <surefire.version>3.0.0-M4</surefire.version>
     </properties>
 
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources/devices/develop</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources/devices/test</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <language>cs</language>
+                        <country>CZ</country>
+                        <run>REMOTE</run>
+                        <appVersion>LATEST</appVersion>
+                        <webPlatform>MAC</webPlatform>
+                        <mobilePlatform>IOS</mobilePlatform>
+                        <jobName>local</jobName>
+                        <createDownloadDirectory>false</createDownloadDirectory>
+                        <environment>UAT</environment>
+                        <appiumUrl>http://localhost:4723</appiumUrl>
+                        <deviceFile/>
+                        <console.pattern>%d{HH:mm:ss} [%-3level] %msg%n%throwable</console.pattern>
+                        <screenRecording>false</screenRecording>
+                        <saveFoundMobileElement>false</saveFoundMobileElement>
+                        <io.netty.tryReflectionSetAccessible>true</io.netty.tryReflectionSetAccessible>
+                    </systemPropertyVariables>
+                    <argLine>--add-opens java.base/jdk.internal.misc=ALL-UNNAMED</argLine>
+                    <trimStackTrace>false</trimStackTrace>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
-    <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
@@ -25,14 +78,21 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
-            <version>4.9.1</version>
+            <version>4.10.0</version>
         </dependency>
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver -->
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-remote-driver</artifactId>
-        <version>4.9.1</version>
-    </dependency>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>4.10.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.8.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>
