@@ -10,4 +10,12 @@ public abstract class Driver {
     }
 
     public abstract void createDriver();
+
+    public RemoteWebDriver getRemoteWebDriver() {
+        return driver;
+    }
+
+    public abstract void activateApp();
+
+    public abstract RemoteWebDriver getDriver();
 }

@@ -6,5 +6,6 @@ public class LoginTest extends IOSTest {
 
     @Test
     public void login() {
+        driver.activateApp();
     }
 }
