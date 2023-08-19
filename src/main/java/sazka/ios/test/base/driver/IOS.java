@@ -1,4 +1,4 @@
-package sazka.ios.test.driver;
+package sazka.ios.test.base.driver;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;

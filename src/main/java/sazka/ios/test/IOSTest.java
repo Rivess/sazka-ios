@@ -1,7 +1,7 @@
 package sazka.ios.test;
 
 import org.testng.annotations.BeforeSuite;
-import sazka.ios.test.driver.IOS;
+import sazka.ios.test.base.driver.IOS;
 
 public class IOSTest {
     protected IOS driver;

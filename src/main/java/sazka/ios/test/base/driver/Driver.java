@@ -1,4 +1,4 @@
-package sazka.ios.test.driver;
+package sazka.ios.test.base.driver;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
