@@ -1,7 +1,7 @@
 package sazka.ios.test.base.driver;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.ios.options.XCUITestOptions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -10,21 +10,11 @@ public class IOS extends Driver {
 
     @Override
     public void createDriver() {
-        //        XCUITestOptions options = new XCUITestOptions()
-        //                .setUdid("00008101-0016684A3406001E")
-        //                .setApp("/home/myapp.ipa");
-        //        try {
-        //            driver = new IOSDriver(
-        //                    new URL("http://127.0.0.1:4723"), options
-        //            );
-        //        } catch (MalformedURLException e) {
-        //            e.printStackTrace();
-        //        }
-        UiAutomator2Options options = new UiAutomator2Options()
-                .setUdid("672fd800");
+        XCUITestOptions options = new XCUITestOptions()
+                .setUdid("22d2425553e7b83298fa70d711f5758f72684cd1");
         try {
-            driver = new AndroidDriver(
-                    new URL("http://127.0.0.1:4723"), options
+            driver = new IOSDriver(
+                    new URL("http://10.130.81.18:4723"), options
             );
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -33,11 +23,11 @@ public class IOS extends Driver {
 
     @Override
     public void activateApp() {
-        getDriver().activateApp("cz.sazka.loterie.uat");
+        getDriver().activateApp("cz.Sazka.Sazka");
     }
 
     @Override
-    public AndroidDriver getDriver() {
-        return (AndroidDriver) driver;
+    public IOSDriver getDriver() {
+        return (IOSDriver) driver;
     }
 }

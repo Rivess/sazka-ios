@@ -1,12 +1,28 @@
 package sazka.ios.test.base;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import sazka.ios.test.base.driver.Driver;
 
+import java.time.Duration;
 import java.util.List;
 
 public abstract class PageComponent implements WebElement {
-    @Override public void click() {
+    protected final int DEFAULT_TIMEOUT = 60;
+    protected Driver driver;
+    private String locator;
 
+    public PageComponent(Driver driver) {
+        this.driver = driver;
+        LocatorProcessor.processLocatorAnnotations(this);
+    }
+
+    @Override
+    public void click() {
+        new WebDriverWait(driver.getDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.id(this.getLocator())))
+                .click();
     }
 
     @Override public void submit() {
@@ -91,5 +107,17 @@ public abstract class PageComponent implements WebElement {
 
     @Override public <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException {
         return null;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public String getLocator() {
+        return locator;
+    }
+
+    public void setLocator(String locator) {
+        this.locator = locator;
     }
 }

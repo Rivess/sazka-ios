@@ -8,11 +8,8 @@ public class IOSTest {
     protected final int DEFAULT_TIMEOUT = 60;
 
     @BeforeSuite
-    public void installApp() {
-        this.startDriver();
-    }
-
-    private void startDriver() {
+    public void setUp() {
         driver = new IOS();
+        driver.activateApp();
     }
 }

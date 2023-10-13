@@ -1,6 +1,16 @@
 package sazka.ios.test.base;
 
-import org.openqa.selenium.support.PageFactory;
+import sazka.ios.test.base.driver.Driver;
 
 public abstract class PageObject {
+    protected Driver driver;
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public PageObject(Driver driver) {
+        this.driver = driver;
+        ObjectFactory.setupPageComponents(this.driver, this);
+    }
 }
