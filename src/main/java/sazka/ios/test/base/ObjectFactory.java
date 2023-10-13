@@ -26,6 +26,7 @@ public class ObjectFactory {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
+        LocatorProcessor.processLocatorAnnotations(pageComponent, field);
         return (T) pageComponent;
     }
 

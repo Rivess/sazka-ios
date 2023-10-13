@@ -4,18 +4,27 @@ import sazka.ios.test.base.annotations.Locator;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 
 public class LocatorProcessor {
 
     public static void processLocatorAnnotations(PageComponent pageComponent) {
-        Annotation[] annotation = pageComponent.getClass().getDeclaredAnnotations();
-        Locator locator = (Locator) annotation[0];
-        pageComponent.setLocator(locator.id());
+        Annotation[] annotations = pageComponent.getClass().getDeclaredAnnotations();
+        for (Annotation annotation : annotations) {
+            if (annotation.annotationType().equals(Locator.class)) {
+                Locator locator = (Locator) annotation;
+                pageComponent.setLocator(locator.id());
+            }
+        }
     }
 
     public static void processLocatorAnnotations(PageComponent pageComponent, Field field) {
-        Annotation[] annotation = field.getClass().getDeclaredAnnotations();
-        Locator locator = (Locator) annotation[0];
-        pageComponent.setLocator(locator.id());
+        Annotation[] annotations = field.getDeclaredAnnotations();
+        for (Annotation annotation : annotations) {
+            if (annotation.annotationType().equals(Locator.class)) {
+                Locator locator = (Locator) annotation;
+                pageComponent.setLocator(locator.id());
+            }
+        }
     }
 }
