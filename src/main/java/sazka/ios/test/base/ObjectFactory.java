@@ -18,7 +18,7 @@ public class ObjectFactory {
         return pageObject;
     }
 
-    private static <T extends PageComponent> T createComponent(Driver driver, Field field) {
+    private static PageComponent createComponent(Driver driver, Field field) {
         PageComponent pageComponent;
         try {
             pageComponent = field.getType().asSubclass(PageComponent.class).getConstructor(Driver.class).newInstance(driver);
@@ -27,7 +27,7 @@ public class ObjectFactory {
             throw new RuntimeException(e.getMessage());
         }
         LocatorProcessor.processLocatorAnnotations(pageComponent, field);
-        return (T) pageComponent;
+        return pageComponent;
     }
 
     public static void setupPageComponents(Driver driver, PageObject pageObject) {

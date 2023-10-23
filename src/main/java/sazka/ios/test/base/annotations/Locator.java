@@ -9,5 +9,16 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.TYPE})
 public @interface Locator {
 
-    String id() default "";
+    String value() default "";
+
+    LocatorType type() default LocatorType.ID;
+
+    enum LocatorType {
+        ID,
+        XPATH;
+
+        public boolean is(LocatorType locatorType) {
+            return this == locatorType;
+        }
+    }
 }

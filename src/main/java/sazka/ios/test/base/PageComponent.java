@@ -3,6 +3,7 @@ package sazka.ios.test.base;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import sazka.ios.test.base.annotations.Locator;
 import sazka.ios.test.base.driver.Driver;
 
 import java.time.Duration;
@@ -12,6 +13,7 @@ public abstract class PageComponent implements WebElement {
     protected final int DEFAULT_TIMEOUT = 60;
     protected Driver driver;
     private String locator;
+    private Locator.LocatorType locatorType;
 
     public PageComponent(Driver driver) {
         this.driver = driver;
@@ -20,8 +22,14 @@ public abstract class PageComponent implements WebElement {
 
     @Override
     public void click() {
+        By locator;
+        if (this.locatorType.is(Locator.LocatorType.ID)) {
+            locator = By.id(this.getLocator());
+        } else {
+            locator = By.xpath(this.getLocator());
+        }
         new WebDriverWait(driver.getDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id(this.getLocator())))
+                .until(ExpectedConditions.visibilityOfElementLocated(locator))
                 .click();
     }
 
@@ -119,5 +127,13 @@ public abstract class PageComponent implements WebElement {
 
     public void setLocator(String locator) {
         this.locator = locator;
+    }
+
+    public Locator.LocatorType getLocatorType() {
+        return locatorType;
+    }
+
+    public void setLocatorType(Locator.LocatorType locatorType) {
+        this.locatorType = locatorType;
     }
 }
