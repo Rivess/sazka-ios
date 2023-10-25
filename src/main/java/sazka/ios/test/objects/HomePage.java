@@ -15,11 +15,6 @@ public class HomePage extends PageObject {
     }
 
     public void clickOnLogin() {
-        if (loginButton.verifyMyText("LALA")) {
-            System.out.println("ANO");
-        } else {
-            System.out.println("NE");
-        }
         loginButton.click();
     }
 }
