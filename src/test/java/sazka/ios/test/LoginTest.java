@@ -8,7 +8,7 @@ public class LoginTest extends IOSTest {
 
     @Test
     public void login() {
-        HomePage homePage = ObjectFactory.createObject(driver, HomePage.class);
+        HomePage homePage = new HomePage(driver);
         homePage.clickOnLogin();
     }
 }

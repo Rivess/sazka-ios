@@ -14,7 +14,7 @@ public class IOS extends Driver {
                 .setUdid("22d2425553e7b83298fa70d711f5758f72684cd1");
         try {
             driver = new IOSDriver(
-                    new URL("http://10.130.81.18:4723"), options
+                    new URL(System.getProperty), options
             );
         } catch (MalformedURLException e) {
             e.printStackTrace();

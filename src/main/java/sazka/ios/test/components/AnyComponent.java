@@ -8,8 +8,8 @@ import sazka.ios.test.base.driver.Driver;
 
 import java.time.Duration;
 
-public class RandomComponent extends PageComponent {
-    public RandomComponent(Driver driver) {
+public class AnyComponent extends PageComponent {
+    public AnyComponent(Driver driver) {
         super(driver);
     }
 

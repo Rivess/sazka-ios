@@ -3,8 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.example</groupId>
+    <groupId>walt02.vse</groupId>
     <artifactId>sazka-ios</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -12,7 +11,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <surefire.version>3.0.0-M4</surefire.version>
+        <surefire.version>3.2.1</surefire.version>
     </properties>
 
     <build>
@@ -46,21 +45,7 @@
                     <systemPropertyVariables>
                         <language>cs</language>
                         <country>CZ</country>
-                        <run>REMOTE</run>
-                        <appVersion>LATEST</appVersion>
-                        <webPlatform>MAC</webPlatform>
-                        <mobilePlatform>IOS</mobilePlatform>
-                        <jobName>local</jobName>
-                        <createDownloadDirectory>false</createDownloadDirectory>
-                        <environment>UAT</environment>
-                        <appiumUrl>http://localhost:4723</appiumUrl>
-                        <deviceFile/>
-                        <console.pattern>%d{HH:mm:ss} [%-3level] %msg%n%throwable</console.pattern>
-                        <screenRecording>false</screenRecording>
-                        <saveFoundMobileElement>false</saveFoundMobileElement>
-                        <io.netty.tryReflectionSetAccessible>true</io.netty.tryReflectionSetAccessible>
                     </systemPropertyVariables>
-                    <argLine>--add-opens java.base/jdk.internal.misc=ALL-UNNAMED</argLine>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>
@@ -72,19 +57,19 @@
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>8.5.1</version>
+            <version>9.0.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
-            <version>4.10.0</version>
+            <version>4.14.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-remote-driver</artifactId>
-            <version>4.10.0</version>
+            <version>4.14.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
@@ -95,7 +80,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
-            <version>4.11.0</version>
+            <version>4.14.0</version>
         </dependency>
     </dependencies>
 
