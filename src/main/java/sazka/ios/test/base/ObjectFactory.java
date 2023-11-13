@@ -18,4 +18,28 @@ public class ObjectFactory {
         }
         return pageObject;
     }
+
+    public static PageComponent createComponent(Driver driver, Field field) {
+        PageComponent pageComponent;
+        try {
+            pageComponent = field.getType().asSubclass(PageComponent.class).getConstructor(Driver.class).newInstance(driver);
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            throw new CannotInstantiateComponent("Could not instantiate page component by name: %s. Original exception: %s", field.getName(), e.getMessage());
+        }
+        LocatorProcessor.processLocatorAnnotations(pageComponent, field);
+        return pageComponent;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends PageComponent> T createComponent(PageComponent pageComponent) {
+        T newPageComponent;
+        try {
+            newPageComponent = (T) pageComponent.getClass().getConstructor(Driver.class).newInstance(pageComponent.getDriver());
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            throw new CannotInstantiateComponent("Could not instantiate page component by name: %s. Original exception: %s",
+                                                 pageComponent.getClass().getName(),
+                                                 e.getMessage());
+        }
+        return newPageComponent;
+    }
 }

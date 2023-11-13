@@ -1,17 +1,13 @@
 package sazka.ios.test.base;
 
+import org.apache.logging.log4j.Level;
 import sazka.ios.test.base.driver.Driver;
-import sazka.ios.test.base.errors.CannotInstantiateComponent;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 public abstract class PageObject {
     protected Driver driver;
-
-    public Driver getDriver() {
-        return driver;
-    }
 
     public PageObject(Driver driver) {
         this.driver = driver;
@@ -20,9 +16,10 @@ public abstract class PageObject {
 
     private void setupPageComponents(Driver driver, PageObject pageObject) {
         PageComponent pageComponent;
-        for (Field field : pageObject.getClass().getDeclaredFields()) {
+        List<Field> fields = this.getPageObjectFields(pageObject);
+        for (Field field : fields) {
             if (PageComponent.class.isAssignableFrom(field.getType())) {
-                pageComponent = this.createComponent(driver, field);
+                pageComponent = ObjectFactory.createComponent(driver, field);
                 try {
                     field.setAccessible(true);
                     field.set(pageObject, pageComponent);
@@ -33,14 +30,18 @@ public abstract class PageObject {
         }
     }
 
-    private PageComponent createComponent(Driver driver, Field field) {
-        PageComponent pageComponent;
-        try {
-            pageComponent = field.getType().asSubclass(PageComponent.class).getConstructor(Driver.class).newInstance(driver);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            throw new CannotInstantiateComponent("Could not instantiate page component by name: %s. Original exception: %s", field.getName(), e.getMessage());
+    private List<Field> getPageObjectFields(PageObject pageObject) {
+        List<Field> fields = new java.util.ArrayList<>(List.of(pageObject.getClass().getDeclaredFields()));
+        Class<?> superclass = pageObject.getClass().getSuperclass();
+        while (superclass != null) {
+            fields.addAll(List.of(superclass.getDeclaredFields()));
+            superclass = superclass.getSuperclass();
         }
-        LocatorProcessor.processLocatorAnnotations(pageComponent, field);
-        return pageComponent;
+
+        return fields;
+    }
+
+    public void log(Level level, String msg, Object... args) {
+        this.driver.log(level, msg, args);
     }
 }

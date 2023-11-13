@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="[%p] %d{yyyy-MM-dd HH:mm:ss} - %m%n"/>
+        </Console>
+
+        <Routing name="routing">
+            <Routes pattern="$${ctx:logFileName}">
+                <Route>
+                    <File name="${ctx:logFileName}" fileName="${ctx:logFileName}">
+                        <PatternLayout pattern="[%p] %d{yyyy-MM-dd HH:mm:ss} - %m%n"/>
+                    </File>
+                </Route>
+            </Routes>
+        </Routing>
+
+    </Appenders>
+    <Loggers>
+        <Root level="info" additivity="false">
+            <AppenderRef ref="routing"/>
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>
