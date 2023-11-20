@@ -15,7 +15,7 @@ public class PlacedBetPage extends PageObject {
     }
 
     public MyBetsPage openMyBets() {
-        myBetsButton.click();
+        myBetsButton.clickWhilePresent();
         return new MyBetsPage(driver);
     }
 }

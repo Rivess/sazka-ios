@@ -50,6 +50,19 @@ public class BetSummaryPage extends PageObject {
         return new PlacedBetPage(driver);
     }
 
+    public BetSummaryPage setChanceNumbers(Lottery lottery) {
+        this.processChanceNumbers(lottery);
+        return this;
+    }
+
+    public BetSummaryPage verifyBetSummary(Lottery lottery) {
+        this.verifyDrawCount(lottery);
+        this.verifyDrawDate(lottery);
+        this.verifyBetNumbers(lottery);
+        this.saveBetPrice(lottery);
+        return this;
+    }
+
     protected void verifyDrawCount(Lottery lottery) {
         String acutal = drawCount.waitUntilPresent().getNumbersFromText();
         if (!acutal.equals(lottery.getDrawCount())) {

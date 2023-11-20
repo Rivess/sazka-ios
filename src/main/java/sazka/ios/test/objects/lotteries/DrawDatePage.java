@@ -36,6 +36,13 @@ public class DrawDatePage extends PageObject {
         super(driver);
     }
 
+    public BetSummaryPage selectDrawCountAndDrawDate(Lottery lottery) {
+        this.selectDrawCount(lottery);
+        this.selectDrawDate(lottery);
+        this.clickContinueButton();
+        return new BetSummaryPage(driver);
+    }
+
     protected void selectDrawDate(Lottery lottery) {
         List<String> drawDaysNames = lottery.getDrawDaysNames();
         List<AnyComponent> drawDays = drawDay.waitUntilPresent().findPageComponents(drawDay);

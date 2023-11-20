@@ -23,7 +23,16 @@ public class SportkaPlaceBetTest extends IOSTest {
         homePage.clickOnLogin()
                 .login(user)
                 .clickOnSportka()
-                .openSportkaBetting()
-                .betSportkaNumbers(sportka);
+                .openBettingPage()
+                .placeBetNumbers(sportka)
+                .selectDrawCountAndDrawDate(sportka)
+                .verifyBetSummary(sportka)
+                .placeBet()
+                .openMyBets()
+                .openFirstEurojackpotBet()
+                .saveBetId(sportka)
+                .verifyDrawCount(sportka)
+                .verifyBetOnDate(sportka)
+                .verifyBetNumbers(sportka);
     }
 }

@@ -1,6 +1,5 @@
 package sazka.ios.test.eurojackpot;
 
-import org.testng.ITestContext;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import sazka.ios.test.IOSTest;
@@ -24,21 +23,17 @@ public class EurojackpotPlaceBetTest extends IOSTest {
         homePage.clickOnLogin()
                 .login(user)
                 .clickOnEurojackpot()
-                .openEurojackpotBetting()
-                .betEurojackpotNumbers(eurojackpot)
-                .selectDrawCount(eurojackpot)
-                .selectDrawDate(eurojackpot)
-                .processEurojackpotChance(eurojackpot)
-                .verifyEurojackpotSummary(eurojackpot)
+                .openBettingPage()
+                .placeBetNumbers(eurojackpot)
+                .selectDrawCountAndDrawDate(eurojackpot)
+                .setChanceNumbers(eurojackpot)
+                .verifyBetSummary(eurojackpot)
                 .placeBet()
-                .openMyBets();
-    }
-
-    @Override
-    public void cleanUpApp(ITestContext context) {
-    }
-
-    @Override
-    public void resetApp() {
+                .openMyBets()
+                .openFirstEurojackpotBet()
+                .saveBetId(eurojackpot)
+                .verifyDrawCount(eurojackpot)
+                .verifyBetOnDate(eurojackpot)
+                .verifyBetNumbers(eurojackpot);
     }
 }

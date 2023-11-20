@@ -17,4 +17,9 @@ public class LotteryPage extends PageObject {
     protected void clickBetButton() {
         betButton.click();
     }
+
+    public BettingPage openBettingPage() {
+        this.clickBetButton();
+        return new BettingPage(driver);
+    }
 }

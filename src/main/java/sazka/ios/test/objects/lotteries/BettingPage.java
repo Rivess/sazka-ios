@@ -30,6 +30,11 @@ public class BettingPage extends PageObject {
         super(driver);
     }
 
+    public DrawDatePage placeBetNumbers(Lottery lottery) {
+        this.betAllTicketBoxesNumbers(lottery);
+        return new DrawDatePage(driver);
+    }
+
     protected void betAllTicketBoxesNumbers(Lottery lottery) {
         Iterator<TicketBox> ticketBoxes = lottery.getTicketBoxes().iterator();
         while (ticketBoxes.hasNext()) {

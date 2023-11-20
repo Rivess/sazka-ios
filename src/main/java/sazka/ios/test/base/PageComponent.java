@@ -82,14 +82,13 @@ public abstract class PageComponent implements WebElement {
     public void clickWhilePresent() {
         driver.log(Level.INFO, "Clicking on element by Locator: %s while the element is still visible", this.getByLocator());
         int tries = 0;
-        this.isPresent(60);
+        this.waitUntilPresent();
         while (this.isPresent(1)) {
             this.find().click();
             if (tries++ > 60) {
                 throw new IOSTestException("Component by locator: %s is still displayed after 60 tries!", this.getByLocator());
             }
         }
-        throw new IOSTestException("Component by locator: %s was not present after 60 seconds!", this.getByLocator());
     }
 
     public PageComponent waitUntilVisible() {
